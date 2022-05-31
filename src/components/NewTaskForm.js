@@ -5,16 +5,14 @@ function NewTaskForm({listOfCategories,onTaskFormSubmit,task}) {
 
 
 
-const [selectedCategory, setSelectedCategory] = useState("")
+const [selectedCategory, setSelectedCategory] = useState("Code")
   const [detail, setDetail] = useState("")
   // const [submittedData, setSubmittedData] = useState([]);
 
   function handleDetailchange(e) {
-      // debugger
       setDetail(e.target.value)
     }
     function handleChange(e) {
-        // debugger
         setSelectedCategory(e.target.value)
       }
       function handleSubmit(e) {
@@ -24,8 +22,9 @@ const [selectedCategory, setSelectedCategory] = useState("")
               text: detail,
               category: selectedCategory
             }
-            const dataArray = [...task, formData]
-            onTaskFormSubmit(dataArray)
+
+            // const dataArray = [...task, formData]
+            onTaskFormSubmit(formData)
             setSelectedCategory("")
             setDetail("")
           }
