@@ -1,14 +1,14 @@
 import React from "react";
 import {useState} from "react"
 
-function CategoryFilter({categories}) {
+function CategoryFilter({categories,task}) {
   const [isClicked,setIsClicked]=useState("false")
 function handleClick(e){
   setIsClicked(isClicked=>!isClicked)
    e.target.className = "selected"
   
   }
-  // const myCategory = categories.filter(category=>{
+  // const myCategory = task.categories.filter(category=>{
   //   category.className === "selected"
   // })
   

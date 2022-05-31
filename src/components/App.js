@@ -9,41 +9,51 @@ console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("")
-  const [detail, setDetail] = useState("")
-  const [submittedData, setSubmittedData] = useState([]);
-  function handleDetailchange(e) {
-    
-    setDetail(e.target.value)
+  
+  // const [selectedCategory, setSelectedCategory] = useState("")
+  // const[formCategory,setFormCategory]=useState("")
+  const [task,setTask]=useState(TASKS)
+  function handleTask(newtask){
+    setTask(newtask)
   }
-  function handleChange(e) {
+
+
+  // const [detail, setDetail] = useState("")
+  // // const [submittedData, setSubmittedData] = useState([]);
+
+  // function handleDetailchange(e) {
+  //   // debugger
+  //   setDetail(e.target.value)
+  // }
+  // function handleChange(e) {
+  //   // debugger
+  //   setFormCategory(e.target.value)
+  // }
+  // function handleSubmit(e) {
     
-    setSelectedCategory(e.target.value)
-  }
-  function handleSubmit(e) {
-    
-    e.preventDefault()
-    let formData = {
-      text: detail,
-      category: selectedCategory
-    }
-    const dataArray = [...submittedData, formData]
-    setSubmittedData(dataArray)
-    setSelectedCategory("")
-    setDetail("")
-  }
+  //   e.preventDefault()
+  //   let formData = {
+  //     text: detail,
+  //     category: formCategory
+  //   }
+  //   const dataArray = [...task, formData]
+  //   setTask(dataArray)
+  //  setFormCategory("")
+  //   setDetail("")
+  // }
+
  
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} tasks={TASKS} />
-      <NewTaskForm listOfCategories={CATEGORIES}
-        onchangedetail={handleDetailchange}
-        handleDetailchange={handleDetailchange}
-        onChangeCategory={handleChange}
-        onTaskFormSubmit={handleSubmit}
+      <CategoryFilter categories={CATEGORIES} task = {task}/>
+      <NewTaskForm listOfCategories={CATEGORIES.filter(category=>category!=="All")}
+      //   onchangedetail={handleDetailchange}
+      // onChangecategory={handleChange}
+        task={task}
+        onTaskFormSubmit={handleTask}
         />
-      <TaskList tasks={TASKS} submittedData={submittedData}/>submittedData
+      <TaskList tasks={task} />
     </div>
   );
 }

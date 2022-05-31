@@ -1,29 +1,57 @@
 import React from "react";
 import {useState} from "react"
 
-function NewTaskForm({listOfCategories,onChangeCategory,onTaskFormSubmit,onchangedetail}) {
-  // const [selectedCategory,setSelectedCategory] = useState("")
-debugger
-  const myCategory=listOfCategories.slice(1).map((category,index)=>{
-    return <option key={index} >{category}</option>
-  })
-  debugger
-  // function handleChange(e){
-  //   debugger
-  // setSelectedCategory(e.target.value)
-  // }
-  
-  return (
-    <form className="new-task-form" onSubmit={onTaskFormSubmit}>
+function NewTaskForm({listOfCategories,onTaskFormSubmit,task}) {
+
+
+
+const [selectedCategory, setSelectedCategory] = useState("")
+  const [detail, setDetail] = useState("")
+  // const [submittedData, setSubmittedData] = useState([]);
+
+  function handleDetailchange(e) {
+      // debugger
+      setDetail(e.target.value)
+    }
+    function handleChange(e) {
+        // debugger
+        setSelectedCategory(e.target.value)
+      }
+      function handleSubmit(e) {
+      
+          e.preventDefault()
+          let formData = {
+              text: detail,
+              category: selectedCategory
+            }
+            const dataArray = [...task, formData]
+            onTaskFormSubmit(dataArray)
+            setSelectedCategory("")
+            setDetail("")
+          }
+        
+        
+        
+        
+        
+        
+        return (
+          <form className="new-task-form" onSubmit={handleSubmit}>
       <label>
         Details
-        <input type="text" name="text" onChange={onchangedetail}/>
+        <input type="text" name="text" onChange={handleDetailchange}/>
       </label>
       <label>
         Category
-        <select name="category" onChange={onChangeCategory}>
+        <select name="category" onChange={handleChange}>
           {/* render <option> elements for each category here */}
-          {myCategory}
+     {/* {listOfCategories.map((category,index)=>{
+        return <option key={index} >{category}</option>
+      })} */}
+     {[<option key='1' >Code</option>,
+     <option key='2'>Money</option>,
+     <option key='3' >Food</option>,
+     <option key='4' >Misc</option>]}
         </select>
       </label>
       <input type="submit" value="Add task" />
